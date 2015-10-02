@@ -9,7 +9,7 @@
 class SplinePointWidget : public QGraphicsItem
 {
 public:
-    SplinePointWidget();
+    SplinePointWidget(QVector2D position);
     QRectF boundingRect() const;
     void paint(QPainter *painter,
                   const QStyleOptionGraphicsItem *option,
@@ -18,8 +18,8 @@ protected:
     void advance(int phase);
 
 private:
-    qreal angle, length;
-    QVector2D position;
+    qreal _angle, _length;
+    QVector2D _position;
 
 };
 

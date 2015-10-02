@@ -3,7 +3,11 @@
 
 #include <vector>
 #include <QVector2D>
+#include <QPoint>
+#include <QRect>
+
 #include "splinepoint.h"
+#include "splinepointwidget.h"
 
 class Spline
 {
@@ -14,22 +18,32 @@ private:
     double _continuity;
     double _tension;
 
+    QVector2D _farthestLeftPoint;
+    QVector2D _farthestRightPoint;
+
 public:
     Spline();
-    void addPoint(SplinePoint point);
-    void addPoint(QVector2D point);
+    void add(SplinePoint point);
+    void add(QVector2D point);
 
-    void removePoint(SplinePoint point);
-    void removePoint(QVector2D point);
-    void removePoint(int index);
+    bool remove(QVector2D point);
+    bool remove(SplinePoint point);
+//    void removePoint(int index);
 
-    double getBias();
-    double getContinuity();
-    double getTension();
+    SplinePoint get(unsigned int index);
+//    SplinePoint get(QVector2D point);
 
-    double setBias(double value);
-    double setContinuity(double value);
-    double setTension(double value);
+    double getBias() { return _bias; }
+    double getContinuity() { return _continuity; }
+    double getTension() { return _tension; }
+
+    unsigned int numberOfPoints() { return _points.size(); }
+
+    void setBias(double value) { _bias = value; }
+    void setContinuity(double value)  { _continuity = value; }
+    void setTension(double value)  { _tension = value; }
+
+    QRect getBoudingRect();
 
 };
 

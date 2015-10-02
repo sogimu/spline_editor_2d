@@ -9,6 +9,8 @@ class SplineEditorWidget : public QGraphicsView
 private:
     QGraphicsScene *_scene;
 
+    Spline _spline;
+
 public:
     SplineEditorWidget(QWidget *parent);
     ~SplineEditorWidget();
