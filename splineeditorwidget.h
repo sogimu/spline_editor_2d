@@ -2,6 +2,8 @@
 #define SPLINEEDITORWIDGET_H
 
 #include <QGraphicsView>
+#include "splinepointwidget.h"
+#include "splinelinewidget.h"
 #include "spline.h"
 
 class SplineEditorWidget : public QGraphicsView
@@ -9,14 +11,14 @@ class SplineEditorWidget : public QGraphicsView
 private:
     QGraphicsScene *_scene;
 
-    Spline _spline;
+    Spline *_spline;
 
 public:
     SplineEditorWidget(QWidget *parent);
     ~SplineEditorWidget();
 
-    void setSpline(Spline spline);
-    Spline getSpline();
+    void setSpline(Spline *spline);
+    Spline* getSpline();
 
 };
 

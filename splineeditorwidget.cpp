@@ -1,5 +1,4 @@
 #include "splineeditorwidget.h"
-#include "splinepointwidget.h"
 
 SplineEditorWidget::SplineEditorWidget(QWidget *parent) :
     QGraphicsView(parent)
@@ -14,25 +13,31 @@ SplineEditorWidget::~SplineEditorWidget()
 
 }
 
-void SplineEditorWidget::setSpline(Spline spline)
+void SplineEditorWidget::setSpline(Spline *spline)
 {
     _spline = spline;
-    _scene->setSceneRect( _spline.getBoudingRect() );
 
     _scene->clear();
 
-    for(unsigned int i=0; i < _spline.numberOfPoints(); i++)
+    for(unsigned int i=0; i < _spline->numberOfPoints(); i++)
     {
-        SplinePoint sp = _spline.get( i );
-        SplinePointWidget *splinePoint = new SplinePointWidget( sp.getPosition() );
+        SplinePointWidget *splinePoint = new SplinePointWidget( _spline, i );
         splinePoint->setFlag( QGraphicsItem::ItemIsMovable );
+        splinePoint->setFlag( QGraphicsItem::ItemSendsScenePositionChanges, true);
         _scene->addItem( splinePoint );
+
+    }
+
+    for(unsigned int i=1; i < _spline->numberOfPoints(); i++)
+    {
+        SplineLineWidget *splineLine = new SplineLineWidget( _spline, i-1, i);
+        _scene->addItem( splineLine );
 
     }
 
 }
 
-Spline SplineEditorWidget::getSpline()
+Spline* SplineEditorWidget::getSpline()
 {
-
+    return _spline;
 }

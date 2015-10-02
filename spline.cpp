@@ -60,27 +60,7 @@ bool Spline::remove(SplinePoint point)
 
 }
 
-//void Spline::removePoint(int index)
-//{
-
-//}
-
-SplinePoint Spline::get(unsigned int index)
+SplinePoint& Spline::get(unsigned int index)
 {
     return _points.at( index );
 }
-
-//SplinePoint get(QVector2D point)
-//{
-
-//}
-
-QRect Spline::getBoudingRect()
-{
-    SplinePointWidget splinePoint( QVector2D( 0.0, 0.0 ) );
-
-    return QRect( QPoint( _farthestLeftPoint.x() + splinePoint.boundingRect().x(),  _farthestLeftPoint.y() + splinePoint.boundingRect().y() ),
-                  QPoint( _farthestRightPoint.x() + splinePoint.boundingRect().width(), _farthestRightPoint.y() + splinePoint.boundingRect().height() ) );
-
-}
-

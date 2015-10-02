@@ -8,16 +8,13 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
 
 
-    Spline spline;
-    spline.add( QVector2D(0,0) );
-    spline.add( QVector2D(100,0) );
-    spline.add( QVector2D(200,0) );
-    spline.add( QVector2D(300,0) );
-    spline.add( QVector2D(400,0) );
-    spline.add( QVector2D(500,0) );
-    spline.add( QVector2D(600,0) );
-    spline.add( QVector2D(700,0) );
-    spline.add( QVector2D(800,0) );
+    Spline *spline = new Spline();
+
+    for(int i=0; i<30; i++)
+    {
+        spline->add( QVector2D(15*i, 0) );
+
+    }
 
     ui->splineEditor->setSpline( spline );
 
@@ -31,4 +28,11 @@ MainWindow::~MainWindow()
 void MainWindow::on_actionExit_triggered()
 {
     close();
+}
+
+void MainWindow::on_DeletePushButton_clicked()
+{
+    Spline *spline = ui->splineEditor->getSpline();
+    Spline spline2;
+
 }

@@ -1,37 +1,38 @@
 #include "splinepointwidget.h"
 
-SplinePointWidget::SplinePointWidget(QVector2D position) :
-    _position( position ),
-    _angle( qrand() % 360 ),
-    _length( 5 )
+SplinePointWidget::SplinePointWidget(Spline *spline, unsigned int pointIndex) :
+    _spline( spline ),
+    _pointIndex( pointIndex )
 {
-    setRotation( _angle );
-    setPos( _position.x(), _position.y() );
+    setPos( _spline->get(_pointIndex).getPosition().x(), _spline->get(_pointIndex).getPosition().y() );
 
 }
 
 QRectF SplinePointWidget::boundingRect() const
 {
-    return QRect(-10,-10,50,50);
+    return QRectF( -10, -10, 10, 10 );
+
 }
 
 void SplinePointWidget::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
-    QRect rect = QRect(-10,-10,20,20);
+    QRect rect = QRect( -10, -10, 10, 10 );
+    painter->fillRect( rect, QColor(255, 0, 0, 255) );
 
-    _angle += 0.01;
-    setRotation( _angle );
-
-    painter->drawEllipse( rect );
-    painter->drawRect(0, -3, 30, 5);
+//    painter->drawText( -25, 0, QString( (int) _spline->get(_dataIndex).getPosition().x() ) + QString(", ") + QString( (int) _spline->get(_dataIndex).getPosition().y() ) );
 
 }
 
-void SplinePointWidget::advance(int phase)
+QVariant SplinePointWidget::itemChange(QGraphicsItem::GraphicsItemChange change, const QVariant & value )
 {
-    if(!phase) return;
+    if (change == SplinePointWidget::ItemPositionChange)
+    {
+        QPointF position = QPointF( value.toPointF().x(), value.toPointF().y() );
+        std::cout << position.x() << ", " << position.y() << " | " << value.toPointF().x() << ", " << value.toPointF().y() << std::endl;
 
-    QPointF location = pos();
+        _spline->get(_pointIndex).setPosition( position.x(), position.y() );
 
-    setPos(mapToParent(0, -_length));
+    }
+
+    return QGraphicsItem::itemChange(change, value);
 }

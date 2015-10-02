@@ -17,12 +17,14 @@ SOURCES += main.cpp\
     splineeditorwidget.cpp \
     spline.cpp \
     splinepoint.cpp \
-    splinepointwidget.cpp
+    splinepointwidget.cpp \
+    splinelinewidget.cpp
 
 HEADERS  += mainwindow.h \
     splineeditorwidget.h \
     spline.h \
     splinepoint.h \
-    splinepointwidget.h
+    splinepointwidget.h \
+    splinelinewidget.h
 
 FORMS    += mainwindow.ui

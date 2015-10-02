@@ -7,7 +7,6 @@
 #include <QRect>
 
 #include "splinepoint.h"
-#include "splinepointwidget.h"
 
 class Spline
 {
@@ -30,8 +29,9 @@ public:
     bool remove(SplinePoint point);
 //    void removePoint(int index);
 
-    SplinePoint get(unsigned int index);
+    SplinePoint& get(unsigned int index);
 //    SplinePoint get(QVector2D point);
+    std::vector<SplinePoint>* getData();
 
     double getBias() { return _bias; }
     double getContinuity() { return _continuity; }

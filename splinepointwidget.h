@@ -6,20 +6,28 @@
 #include <QGraphicsItem>
 #include <QVector2D>
 
+#include <QVariant>
+
+#include <iostream>
+
+#include "spline.h"
+#include "splinepoint.h"
+
 class SplinePointWidget : public QGraphicsItem
 {
 public:
-    SplinePointWidget(QVector2D position);
+    SplinePointWidget(Spline *spline, unsigned int pointIndex);
     QRectF boundingRect() const;
-    void paint(QPainter *painter,
-                  const QStyleOptionGraphicsItem *option,
-                  QWidget *widget);
+
+    void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
+
 protected:
-    void advance(int phase);
+    QVariant itemChange(QGraphicsItem::GraphicsItemChange change, const QVariant & value );
 
 private:
-    qreal _angle, _length;
-    QVector2D _position;
+
+    Spline *_spline;
+    unsigned int _pointIndex;
 
 };
 
