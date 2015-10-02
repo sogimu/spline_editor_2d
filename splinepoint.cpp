@@ -1,7 +1,11 @@
 #include "splinepoint.h"
 
-SplinePoint::SplinePoint()
+SplinePoint::SplinePoint(QVector2D position)
 {
 
 }
 
+SplinePoint::SplinePoint(double x, double y)
+{
+
+}

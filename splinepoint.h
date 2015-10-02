@@ -9,7 +9,9 @@ private:
     QVector2D _position;
 
 public:
-    SplinePoint();
+    SplinePoint(QVector2D position);
+    SplinePoint(double x, double y);
+
 };
 
 #endif // SPLINEPOINT_H
