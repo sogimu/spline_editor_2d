@@ -1,9 +1,11 @@
 #include "splinelinewidget.h"
 
-SplineLineWidget::SplineLineWidget(Spline *spline, unsigned int point0Index, unsigned int point1Index) :
+SplineLineWidget::SplineLineWidget(double localTime0, double localTime1, Spline *spline, unsigned int prevPointIndex, unsigned int nextPointIndex) :
+    _localTime0( localTime0 ),
+    _localTime1( localTime1),
     _spline( spline ),
-    _point0Index( point0Index ),
-    _point1Index( point1Index )
+    _prevPointIndex( prevPointIndex ),
+    _nextPointIndex( nextPointIndex )
 
 {
     setPos( 0,0 );
@@ -15,11 +17,11 @@ QRectF SplineLineWidget::boundingRect() const
     QPoint point0;
     QPoint point1;
 
-    point0.setX( std::min( _spline->at( _point0Index ).getPosition().x(), _spline->at( _point1Index ).getPosition().x() ) );
-    point0.setY( std::min( _spline->at( _point0Index ).getPosition().y(), _spline->at( _point1Index ).getPosition().y() ) );
+    point0.setX( std::min( _spline->positionAt( _prevPointIndex ).x(), _spline->positionAt( _nextPointIndex ).x() ) );
+    point0.setY( std::min( _spline->positionAt( _prevPointIndex ).y(), _spline->positionAt( _nextPointIndex ).y() ) );
 
-    point1.setX( std::max( _spline->at( _point0Index ).getPosition().x(), _spline->at( _point1Index ).getPosition().x() ) );
-    point1.setY( std::max( _spline->at( _point0Index ).getPosition().y(), _spline->at( _point1Index ).getPosition().y() ) );
+    point1.setX( std::max( _spline->positionAt( _prevPointIndex ).x(), _spline->positionAt( _nextPointIndex ).x() ) );
+    point1.setY( std::max( _spline->positionAt( _prevPointIndex ).y(), _spline->positionAt( _nextPointIndex ).y() ) );
 
     return QRectF( point0, point1 );
 
@@ -33,11 +35,11 @@ void SplineLineWidget::paint(QPainter *painter, const QStyleOptionGraphicsItem *
     QPoint point0;
     QPoint point1;
 
-    point0.setX( _spline->at( _point0Index ).getPosition().x() );
-    point0.setY( _spline->at( _point0Index ).getPosition().y() );
+    point0.setX( _spline->positionAt( _prevPointIndex ).x() );
+    point0.setY( _spline->positionAt( _prevPointIndex ).y() );
 
-    point1.setX( _spline->at( _point1Index ).getPosition().x() );
-    point1.setY( _spline->at( _point1Index ).getPosition().y() );
+    point1.setX( _spline->positionAt( _nextPointIndex ).x() );
+    point1.setY( _spline->positionAt( _nextPointIndex ).y() );
 
     painter->drawLine( point0, point1 );
 

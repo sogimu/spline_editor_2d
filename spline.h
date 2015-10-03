@@ -22,16 +22,15 @@ private:
 
 public:
     Spline();
-    void add(SplinePoint point);
-    void add(QVector2D point);
+//    void add(SplinePoint point);
+//    void add(QVector2D point);
 
     bool remove(QVector2D point);
     bool remove(SplinePoint point);
 
-    SplinePoint& get(unsigned int index);
+//    SplinePoint& get(unsigned int index);
 
-    unsigned int numberOfPoints();
-    QRect getBoudingRect();
+//    unsigned int numberOfPoints();
 
     void push_back(SplinePoint point);
     void push_back(QVector2D point);
@@ -39,9 +38,19 @@ public:
     void insert(unsigned int index, SplinePoint point);
     void insert(unsigned int index, QVector2D point);
 
-    SplinePoint& at(unsigned int index);
+    void setPosition(unsigned int index, QVector2D position);
+    void setPosition(unsigned int index, double x, double y);
+
+    QVector2D positionAt(unsigned int index);
+    double derivativeAt(unsigned int index);
+    double biasAt(unsigned int index);
+    double continuityAt(unsigned int index);
+    double tensionAt(unsigned int index);
+
     unsigned int size();
     void clear();
+
+    QRect getBoudingRect();
 
 };
 

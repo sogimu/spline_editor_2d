@@ -16,7 +16,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     }
 
-    spline->insert( 1, QVector2D( 25, 25 ) );
+//    spline->insert( 1, QVector2D( 25, 25 ) );
 
     ui->splineEditor->setSpline( spline );
 

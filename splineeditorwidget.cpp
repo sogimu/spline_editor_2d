@@ -30,8 +30,14 @@ void SplineEditorWidget::setSpline(Spline *spline)
 
     for(unsigned int i=1; i < _spline->size(); i++)
     {
-        SplineLineWidget *splineLine = new SplineLineWidget( _spline, i-1, i);
-        _scene->addItem( splineLine );
+        for(unsigned int j=1; j < 10; j++)
+        {
+            double localTime0 = (1.0 / 10) * (j-1);
+            double localTime1 = (1.0 / 10) * j;
+            SplineLineWidget *splineLine = new SplineLineWidget( localTime0, localTime1, _spline, i-1, i);
+            _scene->addItem( splineLine );
+
+        }
 
     }
 

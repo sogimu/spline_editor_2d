@@ -115,9 +115,39 @@ void Spline::insert(unsigned int index, QVector2D point)
 
 }
 
-SplinePoint& Spline::at(unsigned int index)
+void Spline::setPosition(unsigned int index, QVector2D position)
 {
-    return _points.at( index );
+    _points.at( index ).setPosition( position );
+}
+
+void Spline::setPosition(unsigned int index, double x, double y)
+{
+    _points.at( index ).setPosition( x, y );
+}
+
+QVector2D Spline::positionAt(unsigned int index)
+{
+    return _points.at( index ).getPosition();
+
+}
+
+double Spline::derivativeAt(unsigned int index)
+{
+
+}
+
+double Spline::biasAt(unsigned int index)
+{
+
+}
+
+double Spline::continuityAt(unsigned int index)
+{
+
+}
+
+double Spline::tensionAt(unsigned int index)
+{
 
 }
 

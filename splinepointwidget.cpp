@@ -4,7 +4,7 @@ SplinePointWidget::SplinePointWidget(Spline *spline, unsigned int pointIndex) :
     _spline( spline ),
     _pointIndex( pointIndex )
 {
-    setPos( _spline->at(_pointIndex).getPosition().x(), _spline->at(_pointIndex).getPosition().y() );
+    setPos( _spline->positionAt(_pointIndex).x(), _spline->positionAt(_pointIndex).y() );
 
 }
 
@@ -32,7 +32,7 @@ QVariant SplinePointWidget::itemChange(QGraphicsItem::GraphicsItemChange change,
         QPointF position = QPointF( value.toPointF().x(), value.toPointF().y() );
         std::cout << position.x() << ", " << position.y() << " | " << value.toPointF().x() << ", " << value.toPointF().y() << std::endl;
 
-        _spline->at(_pointIndex).setPosition( position.x(), position.y() );
+        _spline->setPosition(_pointIndex, position.x(), position.y() );
 
     }
 
