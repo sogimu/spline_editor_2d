@@ -10,11 +10,13 @@ MainWindow::MainWindow(QWidget *parent) :
 
     Spline *spline = new Spline();
 
-    for(int i=0; i<30; i++)
+    for(int i=0; i<3; i++)
     {
-        spline->add( QVector2D(15*i, 0) );
+        spline->push_back( QVector2D( i * 50, 0 ) );
 
     }
+
+    spline->insert( 1, QVector2D( 25, 25 ) );
 
     ui->splineEditor->setSpline( spline );
 

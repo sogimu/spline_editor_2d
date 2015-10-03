@@ -15,11 +15,11 @@ QRectF SplineLineWidget::boundingRect() const
     QPoint point0;
     QPoint point1;
 
-    point0.setX( std::min( _spline->get( _point0Index ).getPosition().x(), _spline->get( _point1Index ).getPosition().x() ) );
-    point0.setY( std::min( _spline->get( _point0Index ).getPosition().y(), _spline->get( _point1Index ).getPosition().y() ) );
+    point0.setX( std::min( _spline->at( _point0Index ).getPosition().x(), _spline->at( _point1Index ).getPosition().x() ) );
+    point0.setY( std::min( _spline->at( _point0Index ).getPosition().y(), _spline->at( _point1Index ).getPosition().y() ) );
 
-    point1.setX( std::max( _spline->get( _point0Index ).getPosition().x(), _spline->get( _point1Index ).getPosition().x() ) );
-    point1.setY( std::max( _spline->get( _point0Index ).getPosition().y(), _spline->get( _point1Index ).getPosition().y() ) );
+    point1.setX( std::max( _spline->at( _point0Index ).getPosition().x(), _spline->at( _point1Index ).getPosition().x() ) );
+    point1.setY( std::max( _spline->at( _point0Index ).getPosition().y(), _spline->at( _point1Index ).getPosition().y() ) );
 
     return QRectF( point0, point1 );
 
@@ -33,11 +33,11 @@ void SplineLineWidget::paint(QPainter *painter, const QStyleOptionGraphicsItem *
     QPoint point0;
     QPoint point1;
 
-    point0.setX( _spline->get( _point0Index ).getPosition().x() );
-    point0.setY( _spline->get( _point0Index ).getPosition().y() );
+    point0.setX( _spline->at( _point0Index ).getPosition().x() );
+    point0.setY( _spline->at( _point0Index ).getPosition().y() );
 
-    point1.setX( _spline->get( _point1Index ).getPosition().x() );
-    point1.setY( _spline->get( _point1Index ).getPosition().y() );
+    point1.setX( _spline->at( _point1Index ).getPosition().x() );
+    point1.setY( _spline->at( _point1Index ).getPosition().y() );
 
     painter->drawLine( point0, point1 );
 

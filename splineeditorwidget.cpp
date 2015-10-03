@@ -19,7 +19,7 @@ void SplineEditorWidget::setSpline(Spline *spline)
 
     _scene->clear();
 
-    for(unsigned int i=0; i < _spline->numberOfPoints(); i++)
+    for(unsigned int i=0; i < _spline->size(); i++)
     {
         SplinePointWidget *splinePoint = new SplinePointWidget( _spline, i );
         splinePoint->setFlag( QGraphicsItem::ItemIsMovable );
@@ -28,7 +28,7 @@ void SplineEditorWidget::setSpline(Spline *spline)
 
     }
 
-    for(unsigned int i=1; i < _spline->numberOfPoints(); i++)
+    for(unsigned int i=1; i < _spline->size(); i++)
     {
         SplineLineWidget *splineLine = new SplineLineWidget( _spline, i-1, i);
         _scene->addItem( splineLine );
