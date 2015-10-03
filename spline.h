@@ -2,11 +2,19 @@
 #define SPLINE_H
 
 #include <vector>
+#include <iostream>
+
 #include <QVector2D>
 #include <QPoint>
 #include <QRect>
 
 #include "splinepoint.h"
+
+struct SplinePointDerivative
+{
+    double ra;
+    double rb;
+};
 
 class Spline
 {
@@ -42,10 +50,12 @@ public:
     void setPosition(unsigned int index, double x, double y);
 
     QVector2D positionAt(unsigned int index);
-    double derivativeAt(unsigned int index);
+    SplinePointDerivative derivativeAt(unsigned int index);
     double biasAt(unsigned int index);
     double continuityAt(unsigned int index);
     double tensionAt(unsigned int index);
+
+    bool isExistAt(unsigned int index);
 
     unsigned int size();
     void clear();
