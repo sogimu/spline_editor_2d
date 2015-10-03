@@ -5,6 +5,7 @@
 #include "splinepointwidget.h"
 #include "splinelinewidget.h"
 #include "spline.h"
+#include <cmath>
 
 class SplineEditorWidget : public QGraphicsView
 {

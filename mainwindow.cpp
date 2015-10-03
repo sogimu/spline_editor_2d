@@ -10,7 +10,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     Spline *spline = new Spline();
 
-    for(int i=0; i<3; i++)
+    for(int i=0; i<5; i++)
     {
         spline->push_back( QVector2D( i * 50, 0 ) );
 

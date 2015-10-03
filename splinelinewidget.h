@@ -10,6 +10,7 @@
 
 #include <iostream>
 #include <algorithm>
+#include <cmath>
 
 #include "spline.h"
 #include "splinepoint.h"
