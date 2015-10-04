@@ -81,6 +81,19 @@ void Spline::insert(unsigned int index, QVector2D point)
 
 }
 
+void Spline::insert(SplinePoint index_point, QVector2D point)
+{
+    int index = indexAt( index_point );
+    if( index != -1)
+    {
+        std::cout << "Point not found!" << std::endl;
+    }
+
+    SplinePoint splinePoint = SplinePoint( point );
+    insert( index, splinePoint );
+
+}
+
 void Spline::setPosition(unsigned int index, QVector2D position)
 {
     _points.at( index ).setPosition( position );
@@ -89,6 +102,30 @@ void Spline::setPosition(unsigned int index, QVector2D position)
 void Spline::setPosition(unsigned int index, double x, double y)
 {
     _points.at( index ).setPosition( x, y );
+}
+
+int Spline::indexAt(QVector2D point)
+{
+    int index = -1;
+    for( unsigned int i=0; i < _points.size(); i++ )
+    {
+        SplinePoint p = _points.at( i );
+        if( p.getPosition().x() == point.x() && p.getPosition().y() == point.y() )
+        {
+            index = i;
+            break;
+        }
+
+    }
+
+    return index;
+
+}
+
+int Spline::indexAt(SplinePoint point)
+{
+    return indexAt( point.getPosition() );
+
 }
 
 SplinePoint& Spline::pointAt(unsigned int index)

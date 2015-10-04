@@ -21,8 +21,8 @@ public:
     SplineEditorWidget(QWidget *parent);
     ~SplineEditorWidget();
 
-    void setSpline(Spline *spline);
-    Spline* getSpline();
+    void setSpline(Spline &spline);
+    Spline& getSpline();
 
     static void a(SplinePoint& point);
 

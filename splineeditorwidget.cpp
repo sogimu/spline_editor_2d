@@ -16,9 +16,9 @@ SplineEditorWidget::~SplineEditorWidget()
 
 }
 
-void SplineEditorWidget::setSpline(Spline *spline)
+void SplineEditorWidget::setSpline(Spline &spline)
 {
-    _spline = spline;
+    _spline = &spline;
 
     _scene->clear();
 
@@ -34,10 +34,10 @@ void SplineEditorWidget::setSpline(Spline *spline)
 
     for(unsigned int i=1; i < _spline->size(); i++)
     {
-        for(unsigned int j=1; j <= 10; j++)
+        for(unsigned int j=1; j <= 15; j++)
         {
-            double localTime0 = (1.0 / 10) * (j-1);
-            double localTime1 = (1.0 / 10) * j;
+            double localTime0 = (1.0 / 15) * (j-1);
+            double localTime1 = (1.0 / 15) * j;
             SplineLineWidget *splineLine = new SplineLineWidget( localTime0, localTime1, _spline, i-1, i);
             _scene->addItem( splineLine );
 
@@ -47,9 +47,9 @@ void SplineEditorWidget::setSpline(Spline *spline)
 
 }
 
-Spline* SplineEditorWidget::getSpline()
+Spline& SplineEditorWidget::getSpline()
 {
-    return _spline;
+    return *_spline;
 }
 
 void SplineEditorWidget::selectPoint()

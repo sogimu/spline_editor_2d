@@ -11,14 +11,26 @@ SplinePointWidget::SplinePointWidget(Spline *spline, unsigned int pointIndex) :
 
 QRectF SplinePointWidget::boundingRect() const
 {
-    return QRectF( -5, -5, 10, 10 );
+    return QRectF( -10, -10, 20, 20 );
 
 }
 
 void SplinePointWidget::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
-    QRect rect = QRect( -5, -5, 10, 10 );
-    painter->drawEllipse( rect );
+    QRect rect = QRect( -10, -10, 20, 20 );
+
+    if(isSelected())
+    {
+        painter->setPen( Qt::red );
+        painter->drawEllipse( rect );
+
+    }
+    else
+    {
+        painter->setPen( Qt::green );
+        painter->drawEllipse( rect );
+
+    }
 
 //    painter->drawText( -35, -10, QString::number( spline->positionAt(pointIndex).x(), 'f', 1 ) + QString("|") + QString::number( spline->positionAt(pointIndex).y(), 'f', 1 ) );
 

@@ -45,9 +45,13 @@ public:
 
     void insert(unsigned int index, SplinePoint point);
     void insert(unsigned int index, QVector2D point);
+    void insert(SplinePoint index_point, QVector2D point);
 
     void setPosition(unsigned int index, QVector2D position);
     void setPosition(unsigned int index, double x, double y);
+
+    int indexAt(SplinePoint point);
+    int indexAt(QVector2D point);
 
     SplinePoint& pointAt(unsigned int index);
     QVector2D positionAt(unsigned int index);
