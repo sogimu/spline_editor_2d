@@ -5,31 +5,7 @@ Spline::Spline():
     _farthestRightPoint( QVector2D( 0.0, 0.0 ) )
 {
 
-
 }
-
-//void Spline::add(SplinePoint point)
-//{
-//    _points.push_back( point );
-//    if( point.getPosition().x() < _farthestLeftPoint.x() || point.getPosition().y() < _farthestLeftPoint.y() )
-//    {
-//        _farthestLeftPoint = point.getPosition();
-//    }
-//    else
-//    {
-//        if( point.getPosition().x() > _farthestRightPoint.x() || point.getPosition().y() > _farthestRightPoint.y() )
-//        {
-//            _farthestRightPoint = point.getPosition();
-//        }
-//    }
-//}
-
-//void Spline::add(QVector2D point)
-//{
-//    SplinePoint splinePoint = SplinePoint( point );
-//    add( splinePoint );
-
-//}
 
 bool Spline::remove(QVector2D point)
 {
@@ -56,16 +32,6 @@ bool Spline::remove(SplinePoint point)
     return remove( point.getPosition() );
 
 }
-
-//SplinePoint& Spline::get(unsigned int index)
-//{
-//    return _points.at( index );
-//}
-
-//unsigned int Spline::numberOfPoints()
-//{
-//    return _points.size();
-//}
 
 void Spline::push_back(SplinePoint point)
 {
@@ -125,6 +91,12 @@ void Spline::setPosition(unsigned int index, double x, double y)
     _points.at( index ).setPosition( x, y );
 }
 
+SplinePoint& Spline::pointAt(unsigned int index)
+{
+    return _points.at( index );
+
+}
+
 QVector2D Spline::positionAt(unsigned int index)
 {
     return _points.at( index ).getPosition();
@@ -151,7 +123,6 @@ SplinePointDerivative Spline::derivativeAt(unsigned int index)
 
         res.ra = ( 1 - tensionAt( index ) ) * ( g1 + 0.5 * g3 * ( 1 + continuityAt( index ) ) );
         res.rb = ( 1 - tensionAt( index ) ) * ( g1 + 0.5 * g3 * ( 1 - continuityAt( index ) ) );
-        std::cout << res.ra <<", "<< res.rb << std::endl;
     }
     else
     {
@@ -162,9 +133,6 @@ SplinePointDerivative Spline::derivativeAt(unsigned int index)
 
             res.ra = next - cur;
             res.rb = (1.5 * (next - cur) - 0.5 * derivativeAt( index + 1 ).ra) * (1 - tensionAt( index ));
-            std::cout << res.ra <<", "<< res.rb << std::endl;
-
-
         }
         else
         {
@@ -218,7 +186,7 @@ double Spline::tensionAt(unsigned int index)
 
 bool Spline::isExistAt(unsigned int index)
 {
-    if( index >= 0 && index < _points.size() )
+    if( index < _points.size() )
     {
         return true;
     }

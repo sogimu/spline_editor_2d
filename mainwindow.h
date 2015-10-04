@@ -5,6 +5,8 @@
 
 #include <QMainWindow>
 
+#include "splinepoint.h"
+
 namespace Ui {
 class MainWindow;
 }
@@ -16,6 +18,8 @@ class MainWindow : public QMainWindow
 public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
+
+    void splineEditor_SelectedPoint(SplinePoint& point);
 
 private slots:
     void on_actionExit_triggered();

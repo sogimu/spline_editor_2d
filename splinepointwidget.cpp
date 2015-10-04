@@ -1,10 +1,11 @@
 #include "splinepointwidget.h"
 
 SplinePointWidget::SplinePointWidget(Spline *spline, unsigned int pointIndex) :
-    _spline( spline ),
-    _pointIndex( pointIndex )
+    spline( spline ),
+    pointIndex( pointIndex )
+
 {
-    setPos( _spline->positionAt(_pointIndex).x(), _spline->positionAt(_pointIndex).y() );
+    setPos( spline->positionAt( pointIndex).x(), spline->positionAt( pointIndex).y() );
 
 }
 
@@ -17,11 +18,9 @@ QRectF SplinePointWidget::boundingRect() const
 void SplinePointWidget::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
     QRect rect = QRect( -5, -5, 10, 10 );
-//    painter->fillRect( rect, QColor(255, 0, 0, 255) );
     painter->drawEllipse( rect );
 
-
-//    painter->drawText( -25, 0, QString( (int) _spline->get(_dataIndex).getPosition().x() ) + QString(", ") + QString( (int) _spline->get(_dataIndex).getPosition().y() ) );
+//    painter->drawText( -35, -10, QString::number( spline->positionAt(pointIndex).x(), 'f', 1 ) + QString("|") + QString::number( spline->positionAt(pointIndex).y(), 'f', 1 ) );
 
 }
 
@@ -30,11 +29,23 @@ QVariant SplinePointWidget::itemChange(QGraphicsItem::GraphicsItemChange change,
     if (change == SplinePointWidget::ItemPositionChange)
     {
         QPointF position = QPointF( value.toPointF().x(), value.toPointF().y() );
-        std::cout << position.x() << ", " << position.y() << " | " << value.toPointF().x() << ", " << value.toPointF().y() << std::endl;
-
-        _spline->setPosition(_pointIndex, position.x(), position.y() );
+        spline->setPosition( pointIndex, position.x(), position.y() );
 
     }
 
     return QGraphicsItem::itemChange(change, value);
 }
+
+void SplinePointWidget::mousePressEvent(QGraphicsSceneMouseEvent *event)
+{
+    QGraphicsItem::setSelected(true);
+    QGraphicsItem::mousePressEvent(event);
+}
+
+void SplinePointWidget::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
+{
+    QGraphicsItem::setSelected(false);
+    QGraphicsItem::mouseReleaseEvent(event);
+}
+
+

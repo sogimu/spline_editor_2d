@@ -1,14 +1,17 @@
 #ifndef SPLINEEDITORWIDGET_H
 #define SPLINEEDITORWIDGET_H
 
+#include <cmath>
+
 #include <QGraphicsView>
+
 #include "splinepointwidget.h"
 #include "splinelinewidget.h"
 #include "spline.h"
-#include <cmath>
 
 class SplineEditorWidget : public QGraphicsView
 {
+    Q_OBJECT
 private:
     QGraphicsScene *_scene;
 
@@ -20,6 +23,14 @@ public:
 
     void setSpline(Spline *spline);
     Spline* getSpline();
+
+    static void a(SplinePoint& point);
+
+public slots:
+    void selectPoint();
+
+signals:
+    void selectedPoint(SplinePoint &point);
 
 };
 

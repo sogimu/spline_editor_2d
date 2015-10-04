@@ -5,6 +5,9 @@ SplineEditorWidget::SplineEditorWidget(QWidget *parent) :
 {
     _scene = new QGraphicsScene(this);
     setScene(_scene);
+    setRenderHint(QPainter::Antialiasing, true);
+
+    QObject::connect( _scene, &QGraphicsScene::selectionChanged, this,  &SplineEditorWidget::selectPoint );
 
 }
 
@@ -23,6 +26,7 @@ void SplineEditorWidget::setSpline(Spline *spline)
     {
         SplinePointWidget *splinePoint = new SplinePointWidget( _spline, i );
         splinePoint->setFlag( QGraphicsItem::ItemIsMovable );
+        splinePoint->setFlag( QGraphicsItem::ItemIsSelectable );
         splinePoint->setFlag( QGraphicsItem::ItemSendsScenePositionChanges, true);
         _scene->addItem( splinePoint );
 
@@ -47,3 +51,22 @@ Spline* SplineEditorWidget::getSpline()
 {
     return _spline;
 }
+
+void SplineEditorWidget::selectPoint()
+{
+    QList<QGraphicsItem *> items = _scene->selectedItems();
+
+    if(items.size() > 0)
+    {
+        SplinePointWidget *splinePoint = dynamic_cast<SplinePointWidget*>( items.at(0) );
+        emit this->selectedPoint( _spline->pointAt( splinePoint->pointIndex ) );
+
+    }
+
+}
+
+void SplineEditorWidget::a(SplinePoint& point)
+{
+    std::cout << "wlefkmwlef" << point.getPosition().x() << std::endl;
+}
+

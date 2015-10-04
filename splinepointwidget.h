@@ -21,13 +21,16 @@ public:
 
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
 
+    Spline *spline;
+    unsigned int pointIndex;
+
+
 protected:
     QVariant itemChange(QGraphicsItem::GraphicsItemChange change, const QVariant & value );
+    void mousePressEvent(QGraphicsSceneMouseEvent *event);
+    void mouseReleaseEvent(QGraphicsSceneMouseEvent *event);
 
 private:
-
-    Spline *_spline;
-    unsigned int _pointIndex;
 
 };
 

@@ -49,6 +49,7 @@ public:
     void setPosition(unsigned int index, QVector2D position);
     void setPosition(unsigned int index, double x, double y);
 
+    SplinePoint& pointAt(unsigned int index);
     QVector2D positionAt(unsigned int index);
     SplinePointDerivative derivativeAt(unsigned int index);
     double biasAt(unsigned int index);

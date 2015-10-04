@@ -7,6 +7,7 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
+    QObject::connect(ui->splineEditor, &SplineEditorWidget::selectedPoint, this, &MainWindow::splineEditor_SelectedPoint );
 
     Spline *spline = new Spline();
 
@@ -37,4 +38,16 @@ void MainWindow::on_DeletePushButton_clicked()
     Spline *spline = ui->splineEditor->getSpline();
     Spline spline2;
 
+}
+
+void MainWindow::splineEditor_SelectedPoint(SplinePoint& point)
+{
+    ui->biasLineEdit->setText(       QString::number( point.getBias(),         'f', 1 ) );
+    ui->continuityLineEdit->setText( QString::number( point.getContinuity(),   'f', 1 ) );
+    ui->tensionLineEdit->setText(    QString::number( point.getTension(),      'f', 1 ) );
+
+    ui->positionXLineEdit->setText(  QString::number( point.getPosition().x(), 'f', 1 ) );
+    ui->positionYLineEdit->setText(  QString::number( point.getPosition().y(), 'f', 1 ) );
+
+    std::cout << "wlefkmwlef" << point.getPosition().x() << std::endl;
 }
