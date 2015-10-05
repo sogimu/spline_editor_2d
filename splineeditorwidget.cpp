@@ -34,11 +34,12 @@ void SplineEditorWidget::setSpline(Spline &spline)
 
     for(unsigned int i=1; i < _spline->size(); i++)
     {
-        for(unsigned int j=1; j <= 15; j++)
+        qint16 number_partitions_between_points = _spline->getNumberPartitionsBetweenPoints();
+        for(unsigned int j=1; j <= number_partitions_between_points; j++)
         {
-            double localTime0 = (1.0 / 15) * (j-1);
-            double localTime1 = (1.0 / 15) * j;
-            SplineLineWidget *splineLine = new SplineLineWidget( localTime0, localTime1, _spline, i-1, i);
+            double localTime0 = ( 1.0 / number_partitions_between_points ) * ( j-1 );
+            double localTime1 = ( 1.0 / number_partitions_between_points ) * j;
+            SplineLineWidget *splineLine = new SplineLineWidget( localTime0, localTime1, _spline, i-1, i );
             _scene->addItem( splineLine );
 
         }

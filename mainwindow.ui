@@ -45,7 +45,7 @@
              <x>0</x>
              <y>20</y>
              <width>221</width>
-             <height>171</height>
+             <height>181</height>
             </rect>
            </property>
            <layout class="QVBoxLayout" name="verticalLayout_3">
@@ -261,6 +261,64 @@
          </widget>
         </item>
         <item>
+         <widget class="QGroupBox" name="linesParamsGroupBox">
+          <property name="minimumSize">
+           <size>
+            <width>230</width>
+            <height>200</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>250</width>
+            <height>400</height>
+           </size>
+          </property>
+          <property name="title">
+           <string>Lines params</string>
+          </property>
+          <widget class="QWidget" name="verticalLayoutWidget">
+           <property name="geometry">
+            <rect>
+             <x>8</x>
+             <y>30</y>
+             <width>211</width>
+             <height>23</height>
+            </rect>
+           </property>
+           <layout class="QVBoxLayout" name="verticalLayout">
+            <item>
+             <layout class="QFormLayout" name="formLayout_3">
+              <item row="0" column="0">
+               <widget class="QLabel" name="label">
+                <property name="text">
+                 <string>Partitions: </string>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="1">
+               <widget class="QSlider" name="partitionsNumberHorizontalSlider">
+                <property name="minimum">
+                 <number>1</number>
+                </property>
+                <property name="maximum">
+                 <number>30</number>
+                </property>
+                <property name="value">
+                 <number>15</number>
+                </property>
+                <property name="orientation">
+                 <enum>Qt::Horizontal</enum>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+           </layout>
+          </widget>
+         </widget>
+        </item>
+        <item>
          <spacer name="rightPanelVerticalSpacer">
           <property name="orientation">
            <enum>Qt::Vertical</enum>
@@ -294,7 +352,6 @@
     </property>
     <addaction name="actionNew"/>
     <addaction name="actionSaveAs"/>
-    <addaction name="actionSave"/>
     <addaction name="actionOpen"/>
     <addaction name="actionExit"/>
    </widget>
@@ -335,11 +392,6 @@
   <action name="actionRedo">
    <property name="text">
     <string>&amp;Redo</string>
-   </property>
-  </action>
-  <action name="actionSave">
-   <property name="text">
-    <string>Sa&amp;ve</string>
    </property>
   </action>
   <action name="actionOpen">

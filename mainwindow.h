@@ -4,8 +4,11 @@
 #include <math.h>
 
 #include <QMainWindow>
+#include <QString>
 
 #include "splinepoint.h"
+#include "splineserializer.h"
+#include "splineserializerjson.h"
 
 namespace Ui {
 class MainWindow;
@@ -48,10 +51,19 @@ private slots:
 
     void on_biasLineEdit_editingFinished();
 
+    void on_actionSaveAs_triggered();
+
+    void on_actionOpen_triggered();
+
+    void on_partitionsNumberHorizontalSlider_sliderMoved(int position);
+
+    void on_actionNew_triggered();
+
 private:
     Ui::MainWindow *ui;
 
     SplinePoint *_selectedPoint;
+
 };
 
 #endif // MAINWINDOW_H

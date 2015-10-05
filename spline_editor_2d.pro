@@ -18,13 +18,17 @@ SOURCES += main.cpp\
     spline.cpp \
     splinepoint.cpp \
     splinepointwidget.cpp \
-    splinelinewidget.cpp
+    splinelinewidget.cpp \
+    splineserializer.cpp \
+    splineserializerjson.cpp
 
 HEADERS  += mainwindow.h \
     splineeditorwidget.h \
     spline.h \
     splinepoint.h \
     splinepointwidget.h \
-    splinelinewidget.h
+    splinelinewidget.h \
+    splineserializer.h \
+    splineserializerjson.h
 
 FORMS    += mainwindow.ui

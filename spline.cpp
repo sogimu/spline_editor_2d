@@ -2,7 +2,8 @@
 
 Spline::Spline():
     _farthestLeftPoint( QVector2D( 0.0, 0.0 ) ),
-    _farthestRightPoint( QVector2D( 0.0, 0.0 ) )
+    _farthestRightPoint( QVector2D( 0.0, 0.0 ) ),
+    _number_partitions_between_points( 15 )
 {
 
 }
@@ -84,9 +85,9 @@ void Spline::insert(unsigned int index, QVector2D point)
 void Spline::insert(SplinePoint index_point, QVector2D point)
 {
     int index = indexAt( index_point );
-    if( index != -1)
+    if( index == -1)
     {
-        std::cout << "Point not found!" << std::endl;
+        std::cout << "Point not found! Index = " << index_point.getPosition().x() << "|" << index_point.getPosition().y() << std::endl;
     }
 
     SplinePoint splinePoint = SplinePoint( point );
@@ -246,9 +247,13 @@ void Spline::clear()
 
 }
 
-QRect Spline::getBoudingRect()
+void Spline::setNumberPartitionsBetweenPoints(qint16 number)
 {
-    return QRect( _farthestLeftPoint.x(), _farthestLeftPoint.y(), _farthestRightPoint.x(), _farthestRightPoint.y() );
+    _number_partitions_between_points = number;
+}
 
+qint16 Spline::getNumberPartitionsBetweenPoints()
+{
+    return _number_partitions_between_points;
 }
 

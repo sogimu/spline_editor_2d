@@ -10,24 +10,51 @@ MainWindow::MainWindow(QWidget *parent) :
 
     QObject::connect(ui->splineEditor, &SplineEditorWidget::selectedPoint, this, &MainWindow::splineEditor_SelectedPoint );
 
-    Spline *spline = new Spline();
-
-    for(int i=0; i<10; i++)
-    {
-        spline->push_back( QVector2D( i * 50, sin( i ) * 50 ) );
-
-    }
-
-//    spline->insert( 1, QVector2D( 25, 25 ) );
-
-    ui->splineEditor->setSpline( *spline );
-
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
 }
+
+void MainWindow::on_actionNew_triggered()
+{
+    Spline *spline = new Spline();
+
+    for(int i=0; i<3; i++)
+    {
+        spline->push_back( QVector2D( i * 50, sin( i ) * 50 ) );
+
+    }
+
+    ui->splineEditor->setSpline( *spline );
+
+}
+
+void MainWindow::on_actionOpen_triggered()
+{
+    QString fileName = QFileDialog::getOpenFileName( this, tr("Open Spline"), QString(""), tr("Spline File (*.spline *.json)") );
+    if (!fileName.isEmpty())
+    {
+        Spline& spline = SplineSerializerJson::Read( fileName );
+
+        ui->splineEditor->setSpline( spline );
+
+    }
+
+}
+
+void MainWindow::on_actionSaveAs_triggered()
+{
+    QString fileName = QFileDialog::getSaveFileName( this, tr("Save Spline"), QString(""), tr("Spline File (*.spline *.json)") );
+    if (!fileName.isEmpty())
+    {
+        SplineSerializerJson::Write( fileName, ui->splineEditor->getSpline() );
+
+    }
+
+}
+
 
 void MainWindow::on_actionExit_triggered()
 {
@@ -148,5 +175,13 @@ void MainWindow::on_tensionHorizontalSlider_sliderMoved(int position)
 
 void MainWindow::on_biasLineEdit_editingFinished()
 {
+
+}
+
+void MainWindow::on_partitionsNumberHorizontalSlider_sliderMoved(int position)
+{
+    Spline &spline = ui->splineEditor->getSpline();
+    spline.setNumberPartitionsBetweenPoints( position );
+    ui->splineEditor->setSpline( spline );
 
 }

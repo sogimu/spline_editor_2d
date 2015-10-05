@@ -28,6 +28,8 @@ private:
     QVector2D _farthestLeftPoint;
     QVector2D _farthestRightPoint;
 
+    qint16 _number_partitions_between_points;
+
 public:
     Spline();
 //    void add(SplinePoint point);
@@ -65,7 +67,8 @@ public:
     unsigned int size();
     void clear();
 
-    QRect getBoudingRect();
+    void setNumberPartitionsBetweenPoints(qint16 number);
+    qint16 getNumberPartitionsBetweenPoints();
 
 };
 

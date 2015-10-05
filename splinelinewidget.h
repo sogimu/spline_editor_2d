@@ -21,9 +21,7 @@ public:
     SplineLineWidget(double localTime0, double localTime1, Spline *spline, unsigned int prevPointIndex, unsigned int nextPointIndex);
     QRectF boundingRect() const;
 
-    void paint(QPainter *painter,
-                  const QStyleOptionGraphicsItem *option,
-                  QWidget *widget);
+    void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
 
 private:
     double _localTime0;
@@ -31,6 +29,8 @@ private:
     Spline *_spline;
     unsigned int _prevPointIndex;
     unsigned int _nextPointIndex;
+
+    QRectF _boundingRect;
 
 };
 
