@@ -73,7 +73,6 @@ void MainWindow::splineEditor_SelectedPoint(SplinePoint& point)
     ui->positionXLineEdit->setText(  QString::number( point.getPosition().x(), 'f', 1 ) );
     ui->positionYLineEdit->setText(  QString::number( point.getPosition().y(), 'f', 1 ) );
 
-    std::cout << "wlefkmwlef" << point.getPosition().x() << std::endl;
 }
 
 void MainWindow::on_biasLineEdit_textChanged(const QString &arg1)

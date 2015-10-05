@@ -64,9 +64,3 @@ void SplineEditorWidget::selectPoint()
     }
 
 }
-
-void SplineEditorWidget::a(SplinePoint& point)
-{
-    std::cout << "wlefkmwlef" << point.getPosition().x() << std::endl;
-}
-

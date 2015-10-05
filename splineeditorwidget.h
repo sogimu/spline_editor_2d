@@ -24,8 +24,6 @@ public:
     void setSpline(Spline &spline);
     Spline& getSpline();
 
-    static void a(SplinePoint& point);
-
 public slots:
     void selectPoint();
 
