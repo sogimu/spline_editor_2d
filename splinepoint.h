@@ -8,26 +8,26 @@ class SplinePoint
 private:
     QVector2D _position;
 
-    double _bias;
-    double _continuity;
-    double _tension;
+    qreal _bias;
+    qreal _continuity;
+    qreal _tension;
 
 public:
     SplinePoint(QVector2D position);
-    SplinePoint(double x, double y);
+    SplinePoint(qreal x, qreal y);
 
     void setPosition(QVector2D pos) { _position = pos; }
-    void setPosition(double x, double y) { _position = QVector2D(x, y); }
+    void setPosition(qreal x, qreal y) { _position = QVector2D(x, y); }
 
-    void setBias(double value) { _bias = value; }
-    void setContinuity(double value)  { _continuity = value; }
-    void setTension(double value)  { _tension = value; }
+    void setBias(qreal value) { _bias = value; }
+    void setContinuity(qreal value)  { _continuity = value; }
+    void setTension(qreal value)  { _tension = value; }
 
     QVector2D getPosition() { return _position; }
 
-    double getBias() { return _bias; }
-    double getContinuity() { return _continuity; }
-    double getTension() { return _tension; }
+    qreal getBias() { return _bias; }
+    qreal getContinuity() { return _continuity; }
+    qreal getTension() { return _tension; }
 
 };
 

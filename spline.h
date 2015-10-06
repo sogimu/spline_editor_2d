@@ -12,8 +12,8 @@
 
 struct SplinePointDerivative
 {
-    double ra;
-    double rb;
+    qreal ra;
+    qreal rb;
 };
 
 class Spline
@@ -21,26 +21,13 @@ class Spline
 private:
     std::vector<SplinePoint> _points;
 
-//    std::vector::insert();
-//    std::vector::push_back();
-//    std::vector::pop_back();
-
-    QVector2D _farthestLeftPoint;
-    QVector2D _farthestRightPoint;
-
     qint16 _number_partitions_between_points;
 
 public:
     Spline();
-//    void add(SplinePoint point);
-//    void add(QVector2D point);
 
     bool remove(QVector2D point);
     bool remove(SplinePoint point);
-
-//    SplinePoint& get(unsigned int index);
-
-//    unsigned int numberOfPoints();
 
     void push_back(SplinePoint point);
     void push_back(QVector2D point);
@@ -50,7 +37,7 @@ public:
     void insert(SplinePoint index_point, QVector2D point);
 
     void setPosition(unsigned int index, QVector2D position);
-    void setPosition(unsigned int index, double x, double y);
+    void setPosition(unsigned int index, qreal x, qreal y);
 
     int indexAt(SplinePoint point);
     int indexAt(QVector2D point);
@@ -58,9 +45,9 @@ public:
     SplinePoint& pointAt(unsigned int index);
     QVector2D positionAt(unsigned int index);
     SplinePointDerivative derivativeAt(unsigned int index);
-    double biasAt(unsigned int index);
-    double continuityAt(unsigned int index);
-    double tensionAt(unsigned int index);
+    qreal biasAt(unsigned int index);
+    qreal continuityAt(unsigned int index);
+    qreal tensionAt(unsigned int index);
 
     bool isExistAt(unsigned int index);
 

@@ -1,6 +1,6 @@
 #include "splinelinewidget.h"
 
-SplineLineWidget::SplineLineWidget(double localTime0, double localTime1, Spline *spline, unsigned int prevPointIndex, unsigned int nextPointIndex) :
+SplineLineWidget::SplineLineWidget(qreal localTime0, qreal localTime1, Spline *spline, unsigned int prevPointIndex, unsigned int nextPointIndex) :
     _localTime0( localTime0 ),
     _localTime1( localTime1),
     _spline( spline ),
@@ -28,14 +28,14 @@ void SplineLineWidget::paint(QPainter *painter, const QStyleOptionGraphicsItem *
     QVector2D p1 = _spline->positionAt( _prevPointIndex );
     QVector2D p2 = _spline->positionAt( _nextPointIndex );
 
-    double t0 = _localTime0;
-    double t1 = _localTime1;
+    qreal t0 = _localTime0;
+    qreal t1 = _localTime1;
 
-    double r00 = _spline->derivativeAt( _prevPointIndex ).ra;
-    double r01 = _spline->derivativeAt( _nextPointIndex ).rb;
+    qreal r00 = _spline->derivativeAt( _prevPointIndex ).ra;
+    qreal r01 = _spline->derivativeAt( _nextPointIndex ).rb;
 
-    double r10 = r00;
-    double r11 = r01;
+    qreal r10 = r00;
+    qreal r11 = r01;
 
     point0 = ( p1  * (2*pow(t0,3) - 3*pow(t0,2) + 1) ) + ( p2  * (-2*pow(t0,3) + 3*pow(t0,2)) );
     point0.setX( point0.x() + ( r00 * (pow(t0,3) - 2*pow(t0,2) + t0) ) + ( r01 * (pow(t0,3) - pow(t0,2)) ) );
@@ -56,12 +56,12 @@ void SplineLineWidget::paint(QPainter *painter, const QStyleOptionGraphicsItem *
 
 //    painter->drawRect( boundingRect );
 
-
     if( _boundingRect != boundingRect )
     {
         this->prepareGeometryChange();
         _boundingRect = boundingRect;
 
     }
+//    update( _boundingRect );
 
 }

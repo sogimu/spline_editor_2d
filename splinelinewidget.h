@@ -18,14 +18,14 @@
 class SplineLineWidget : public QGraphicsItem
 {
 public:
-    SplineLineWidget(double localTime0, double localTime1, Spline *spline, unsigned int prevPointIndex, unsigned int nextPointIndex);
+    SplineLineWidget(qreal localTime0, qreal localTime1, Spline *spline, unsigned int prevPointIndex, unsigned int nextPointIndex);
     QRectF boundingRect() const;
 
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
 
 private:
-    double _localTime0;
-    double _localTime1;
+    qreal _localTime0;
+    qreal _localTime1;
     Spline *_spline;
     unsigned int _prevPointIndex;
     unsigned int _nextPointIndex;

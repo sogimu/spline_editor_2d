@@ -12,6 +12,9 @@
 
 #include "spline.h"
 #include "splinepoint.h"
+#include "splineeditorwidget.h"
+
+class SplinePointWidget;
 
 class SplinePointWidget : public QGraphicsItem
 {
@@ -24,6 +27,11 @@ public:
     Spline *spline;
     unsigned int pointIndex;
 
+    QVector2D _oldPosition;
+
+    QPen linePenSelected;
+    QPen linePenUnselected;
+    QPen linePen;
 
 protected:
     QVariant itemChange(QGraphicsItem::GraphicsItemChange change, const QVariant & value );

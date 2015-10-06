@@ -2,9 +2,13 @@
 
 SplinePointWidget::SplinePointWidget(Spline *spline, unsigned int pointIndex) :
     spline( spline ),
-    pointIndex( pointIndex )
+    pointIndex( pointIndex ),
+
+    linePenSelected( Qt::red ),
+    linePenUnselected( Qt::green )
 
 {
+    _oldPosition = spline->positionAt( pointIndex);
     setPos( spline->positionAt( pointIndex).x(), spline->positionAt( pointIndex).y() );
 
 }
@@ -19,20 +23,25 @@ void SplinePointWidget::paint(QPainter *painter, const QStyleOptionGraphicsItem 
 {
     QRect rect = QRect( -10, -10, 20, 20 );
 
+    if( _oldPosition != spline->positionAt( pointIndex) )
+    {
+        _oldPosition = spline->positionAt( pointIndex);
+        setPos( spline->positionAt( pointIndex).x(), spline->positionAt( pointIndex).y() );
+
+    }
+
     if(isSelected())
     {
-        painter->setPen( Qt::red );
+        painter->setPen( linePenSelected );
         painter->drawEllipse( rect );
 
     }
     else
     {
-        painter->setPen( Qt::green );
+        painter->setPen( linePenUnselected );
         painter->drawEllipse( rect );
 
     }
-
-//    painter->drawText( -35, -10, QString::number( spline->positionAt(pointIndex).x(), 'f', 1 ) + QString("|") + QString::number( spline->positionAt(pointIndex).y(), 'f', 1 ) );
 
 }
 
@@ -42,7 +51,6 @@ QVariant SplinePointWidget::itemChange(QGraphicsItem::GraphicsItemChange change,
     {
         QPointF position = QPointF( value.toPointF().x(), value.toPointF().y() );
         spline->setPosition( pointIndex, position.x(), position.y() );
-
     }
 
     return QGraphicsItem::itemChange(change, value);

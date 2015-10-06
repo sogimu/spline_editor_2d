@@ -20,7 +20,13 @@ SOURCES += main.cpp\
     splinepointwidget.cpp \
     splinelinewidget.cpp \
     splineserializer.cpp \
-    splineserializerjson.cpp
+    splineserializerjson.cpp \
+    history.cpp \
+    historyitem.cpp \
+    positionhistoryitem.cpp \
+    biashistoryitem.cpp \
+    continuityhistoryitem.cpp \
+    tensionhistoryitem.cpp
 
 HEADERS  += mainwindow.h \
     splineeditorwidget.h \
@@ -29,6 +35,12 @@ HEADERS  += mainwindow.h \
     splinepointwidget.h \
     splinelinewidget.h \
     splineserializer.h \
-    splineserializerjson.h
+    splineserializerjson.h \
+    historyitem.h \
+    history.h \
+    positionhistoryitem.h \
+    biashistoryitem.h \
+    continuityhistoryitem.h \
+    tensionhistoryitem.h
 
 FORMS    += mainwindow.ui

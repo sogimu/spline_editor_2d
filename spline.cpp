@@ -1,8 +1,6 @@
 #include "spline.h"
 
 Spline::Spline():
-    _farthestLeftPoint( QVector2D( 0.0, 0.0 ) ),
-    _farthestRightPoint( QVector2D( 0.0, 0.0 ) ),
     _number_partitions_between_points( 15 )
 {
 
@@ -15,7 +13,7 @@ bool Spline::remove(QVector2D point)
     for( unsigned int i=0; i < _points.size(); i++ )
     {
         SplinePoint p = _points.at( i );
-        if( p.getPosition().x() == point.x() && p.getPosition().y() == point.y() )
+        if( abs( p.getPosition().x() - point.x() ) < 0.001 && abs( p.getPosition().y() - point.y() ) < 0.001 )
         {
             _points.erase( _points.begin() + i );
             isSuccess = true;
@@ -37,42 +35,17 @@ bool Spline::remove(SplinePoint point)
 void Spline::push_back(SplinePoint point)
 {
     _points.push_back( point );
-    if( point.getPosition().x() < _farthestLeftPoint.x() || point.getPosition().y() < _farthestLeftPoint.y() )
-    {
-        _farthestLeftPoint = point.getPosition();
-    }
-    else
-    {
-        if( point.getPosition().x() > _farthestRightPoint.x() || point.getPosition().y() > _farthestRightPoint.y() )
-        {
-            _farthestRightPoint = point.getPosition();
-        }
-    }
-
 }
 
 void Spline::push_back(QVector2D point)
 {
     SplinePoint splinePoint = SplinePoint( point );
     push_back( splinePoint );
-
 }
 
 void Spline::insert(unsigned int index, SplinePoint point)
 {
     _points.insert( _points.begin() + index, point );
-    if( point.getPosition().x() < _farthestLeftPoint.x() || point.getPosition().y() < _farthestLeftPoint.y() )
-    {
-        _farthestLeftPoint = point.getPosition();
-    }
-    else
-    {
-        if( point.getPosition().x() > _farthestRightPoint.x() || point.getPosition().y() > _farthestRightPoint.y() )
-        {
-            _farthestRightPoint = point.getPosition();
-        }
-    }
-
 }
 
 void Spline::insert(unsigned int index, QVector2D point)
@@ -100,7 +73,7 @@ void Spline::setPosition(unsigned int index, QVector2D position)
     _points.at( index ).setPosition( position );
 }
 
-void Spline::setPosition(unsigned int index, double x, double y)
+void Spline::setPosition(unsigned int index, qreal x, qreal y)
 {
     _points.at( index ).setPosition( x, y );
 }
@@ -111,7 +84,7 @@ int Spline::indexAt(QVector2D point)
     for( unsigned int i=0; i < _points.size(); i++ )
     {
         SplinePoint p = _points.at( i );
-        if( p.getPosition().x() == point.x() && p.getPosition().y() == point.y() )
+        if( abs( p.getPosition().x() - point.x() ) < 0.001 && abs( p.getPosition().y() - point.y() ) < 0.001 )
         {
             index = i;
             break;
@@ -145,9 +118,9 @@ SplinePointDerivative Spline::derivativeAt(unsigned int index)
 {
     SplinePointDerivative res;
 
-    double cur;
-    double prev;
-    double next;
+    qreal cur;
+    qreal prev;
+    qreal next;
 
     if( isExistAt( index-1 ) && isExistAt( index ) && isExistAt( index+1 ) )
     {
@@ -155,9 +128,9 @@ SplinePointDerivative Spline::derivativeAt(unsigned int index)
         prev = positionAt( index - 1 ).y();
         next = positionAt( index + 1 ).y();
 
-        double g1 = ( cur - prev ) * ( 1 + biasAt( index ) );
-        double g2 = ( next - cur ) * ( 1 - biasAt( index ) );
-        double g3 = g2 - g1;
+        qreal g1 = ( cur - prev ) * ( 1 + biasAt( index ) );
+        qreal g2 = ( next - cur ) * ( 1 - biasAt( index ) );
+        qreal g3 = g2 - g1;
 
         res.ra = ( 1 - tensionAt( index ) ) * ( g1 + 0.5 * g3 * ( 1 + continuityAt( index ) ) );
         res.rb = ( 1 - tensionAt( index ) ) * ( g1 + 0.5 * g3 * ( 1 - continuityAt( index ) ) );
@@ -204,19 +177,19 @@ SplinePointDerivative Spline::derivativeAt(unsigned int index)
 
 }
 
-double Spline::biasAt(unsigned int index)
+qreal Spline::biasAt(unsigned int index)
 {
     return _points.at( index ).getBias();
 
 }
 
-double Spline::continuityAt(unsigned int index)
+qreal Spline::continuityAt(unsigned int index)
 {
     return _points.at( index ).getContinuity();
 
 }
 
-double Spline::tensionAt(unsigned int index)
+qreal Spline::tensionAt(unsigned int index)
 {
     return _points.at( index ).getTension();
 
