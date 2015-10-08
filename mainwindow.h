@@ -5,6 +5,7 @@
 
 #include <QMainWindow>
 #include <QString>
+#include <QDebug>
 
 #include "splinepoint.h"
 #include "splineserializer.h"

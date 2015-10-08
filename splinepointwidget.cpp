@@ -47,6 +47,13 @@ void SplinePointWidget::paint(QPainter *painter, const QStyleOptionGraphicsItem 
 
 QVariant SplinePointWidget::itemChange(QGraphicsItem::GraphicsItemChange change, const QVariant & value )
 {
+        int d=23;
+    if (change == SplinePointWidget::ItemSelectedChange)
+    {
+
+        d =+ 23;
+    }
+
     if (change == SplinePointWidget::ItemPositionChange)
     {
         QPointF position = QPointF( value.toPointF().x(), value.toPointF().y() );
@@ -58,13 +65,13 @@ QVariant SplinePointWidget::itemChange(QGraphicsItem::GraphicsItemChange change,
 
 void SplinePointWidget::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
-    QGraphicsItem::setSelected(true);
+//    QGraphicsItem::setSelected(true);
     QGraphicsItem::mousePressEvent(event);
 }
 
 void SplinePointWidget::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 {
-    QGraphicsItem::setSelected(false);
+//    QGraphicsItem::setSelected(false);
     QGraphicsItem::mouseReleaseEvent(event);
 }
 

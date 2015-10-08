@@ -116,7 +116,7 @@ void SplineEditorWidget::mousePressEvent(QMouseEvent *event)
         emit pressedPoint( _spline->pointAt( splinePoint->pointIndex ) );
 
     }
-
+    
     if(_is_shift_pressed)
     {
         std::cout << mapToScene(event->pos()).x() << "|" << mapToScene(event->pos()).y() << std::endl;

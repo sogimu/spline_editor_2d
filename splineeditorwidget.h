@@ -4,6 +4,7 @@
 #include <cmath>
 
 #include <QGraphicsView>
+#include <QKeyEvent>
 
 #include "splinepointwidget.h"
 #include "splinelinewidget.h"
@@ -19,6 +20,8 @@ private:
     Spline *_spline;
     SplinePoint *_selectedPoint;
 
+    bool _is_shift_pressed = false;
+
 public:
     QGraphicsScene *_scene;
 
@@ -31,6 +34,8 @@ public:
     void mousePressEvent(QMouseEvent *event);
     void mouseMoveEvent(QMouseEvent *event);
     void mouseReleaseEvent(QMouseEvent *event);
+    void keyPressEvent(QKeyEvent *event);
+    void keyReleaseEvent(QKeyEvent *event);
 
     bool isSplineExist();
     bool isPointSelected();
@@ -40,7 +45,7 @@ public:
 
 public slots:
     void selectPoint();
-//    void movePoint(SplinePoint &point);
+//    void selectPoint(QGraphicsItem *newFocus, QGraphicsItem *oldFocus, Qt::FocusReason reason);
 
 signals:
     void selectedPoint(SplinePoint &point);

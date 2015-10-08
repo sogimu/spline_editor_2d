@@ -11,6 +11,7 @@ MainWindow::MainWindow(QWidget *parent) :
     QObject::connect(ui->splineEditor, &SplineEditorWidget::movedPoint, this, &MainWindow::splineEditor_MovedPoint );
     QObject::connect(ui->splineEditor, &SplineEditorWidget::pressedPoint, this, &MainWindow::splineEditor_PressedPoint );
     QObject::connect(ui->splineEditor, &SplineEditorWidget::releasedPoint, this, &MainWindow::splineEditor_ReleasedPoint );
+    on_actionNew_triggered();
 
 }
 
@@ -23,11 +24,11 @@ void MainWindow::on_actionNew_triggered()
 {
     Spline *spline = new Spline();
 
-    for(int i=0; i<10; i++)
-    {
-        spline->push_back( QVector2D( i * 50, sin( i ) * 50 ) );
+//    for(int i=0; i<1; i++)
+//    {
+//        spline->push_back( QVector2D( i * 50, sin( i ) * 50 ) );
 
-    }
+//    }
 
     ui->splineEditor->setSpline( *spline );
 
@@ -116,9 +117,9 @@ void MainWindow::splineEditor_MovedPoint(SplinePoint& point)
     ui->continuityLineEdit->setText( QString::number( point.getContinuity(),   'f', 1 ) );
     ui->tensionLineEdit->setText(    QString::number( point.getTension(),      'f', 1 ) );
 
-    ui->biasHorizontalSlider->setValue(       static_cast<int>( point.getBias()       ) );
-    ui->continuityHorizontalSlider->setValue( static_cast<int>( point.getContinuity() ) );
-    ui->tensionHorizontalSlider->setValue(    static_cast<int>( point.getTension()    ) );
+    ui->biasHorizontalSlider->setValue(       static_cast<int>( point.getBias() * 10       ) );
+    ui->continuityHorizontalSlider->setValue( static_cast<int>( point.getContinuity() * 10 ) );
+    ui->tensionHorizontalSlider->setValue(    static_cast<int>( point.getTension() * 10    ) );
 
     ui->positionXLineEdit->setText(  QString::number( point.getPosition().x(), 'f', 1 ) );
     ui->positionYLineEdit->setText(  QString::number( point.getPosition().y(), 'f', 1 ) );
@@ -132,9 +133,9 @@ void MainWindow::splineEditor_PressedPoint(SplinePoint& point)
     ui->continuityLineEdit->setText( QString::number( point.getContinuity(),   'f', 1 ) );
     ui->tensionLineEdit->setText(    QString::number( point.getTension(),      'f', 1 ) );
 
-    ui->biasHorizontalSlider->setValue(       static_cast<int>( point.getBias()       ) );
-    ui->continuityHorizontalSlider->setValue( static_cast<int>( point.getContinuity() ) );
-    ui->tensionHorizontalSlider->setValue(    static_cast<int>( point.getTension()    ) );
+    ui->biasHorizontalSlider->setValue(       static_cast<int>( point.getBias() * 10       ) );
+    ui->continuityHorizontalSlider->setValue( static_cast<int>( point.getContinuity() * 10 ) );
+    ui->tensionHorizontalSlider->setValue(    static_cast<int>( point.getTension() * 10    ) );
 
     ui->positionXLineEdit->setText(  QString::number( point.getPosition().x(), 'f', 1 ) );
     ui->positionYLineEdit->setText(  QString::number( point.getPosition().y(), 'f', 1 ) );
@@ -288,7 +289,9 @@ void MainWindow::on_biasHorizontalSlider_sliderMoved(int position)
 {
     if( ui->splineEditor->isSplineExist() )
     {
-        ui->biasLineEdit->setText( QString::number(position) );
+        double value = position / 10.0;
+
+        ui->biasLineEdit->setText( QString::number( value ) );
         ui->splineEditor->redraw();
 
     }
@@ -299,7 +302,9 @@ void MainWindow::on_continuityHorizontalSlider_sliderMoved(int position)
 {
     if( ui->splineEditor->isSplineExist() )
     {
-        ui->continuityLineEdit->setText( QString::number(position) );
+        double value = position / 10.0;
+
+        ui->continuityLineEdit->setText( QString::number( value ) );
         ui->splineEditor->redraw();
     }
 
@@ -309,7 +314,9 @@ void MainWindow::on_tensionHorizontalSlider_sliderMoved(int position)
 {
     if( ui->splineEditor->isSplineExist() )
     {
-        ui->tensionLineEdit->setText( QString::number(position) );
+        double value = position / 10.0;
+
+        ui->tensionLineEdit->setText( QString::number( value ) );
         ui->splineEditor->redraw();
     }
 
